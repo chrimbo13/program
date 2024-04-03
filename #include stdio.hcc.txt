@@ -1,0 +1,95 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// Funzione per stampare l'introduzione del gioco
+void stampa_introduzione() {
+    printf("Benvenuto al gioco delle domande!\n");
+    printf("Lo scopo del gioco è rispondere correttamente al maggior numero di domande possibili.\n");
+}
+
+// Funzione per mostrare il menu di scelta
+char mostra_menu() {
+    char scelta;
+    printf("\nMenu di scelta:\n");
+    printf("A) Iniziare una nuova partita\n");
+    printf("B) Uscire dal gioco\n");
+    printf("Scelta: ");
+    scanf(" %c", &scelta);
+    return scelta;
+}
+
+// Funzione per ricevere il nome del giocatore
+void ricevi_nome(char *nome) {
+    printf("Inserisci il tuo nome: ");
+    scanf("%s", nome);
+}
+
+// Funzione per presentare le domande all'utente e calcolare il punteggio
+int gioca() {
+    int punteggio = 0;
+    char risposta;
+
+    // Domanda 1
+    printf("\nDomanda 1: Qual è la capitale dell'Italia?\n");
+    printf("A) Roma\nB) Milano\nC) Firenze\nScelta: ");
+    scanf(" %c", &risposta);
+    if (risposta == 'A' || risposta == 'a') {
+        printf("Risposta corretta!\n");
+        punteggio++;
+    } else {
+        printf("Risposta sbagliata!\n");
+    }
+
+    // Domanda 2
+    printf("\nDomanda 2: Quale pianeta è più vicino al sole?\n");
+    printf("A) Marte\nB) Venere\nC) Giove\nScelta: ");
+    scanf(" %c", &risposta);
+    if (risposta == 'B' || risposta == 'b') {
+        printf("Risposta corretta!\n");
+        punteggio++;
+    } else {
+        printf("Risposta sbagliata!\n");
+    }
+
+    // Domanda 3
+    printf("\nDomanda 3: Chi ha scritto 'La Divina Commedia'?\n");
+    printf("A) Dante Alighieri\nB) William Shakespeare\nC) Giovanni Boccaccio\nScelta: ");
+    scanf(" %c", &risposta);
+    if (risposta == 'A' || risposta == 'a') {
+        printf("Risposta corretta!\n");
+        punteggio++;
+    } else {
+        printf("Risposta sbagliata!\n");
+    }
+
+    return punteggio;
+}
+
+int main() {
+    char scelta, nome[50];
+    int punteggio_totale = 0;
+
+    stampa_introduzione();
+
+    do {
+        scelta = mostra_menu();
+
+        switch (scelta) {
+            case 'A':
+            case 'a':
+                ricevi_nome(nome);
+                printf("\nInizia la partita, %s!\n", nome);
+                punteggio_totale += gioca();
+                break;
+            case 'B':
+            case 'b':
+                printf("\nGrazie per aver giocato! Il tuo punteggio totale è: %d\n", punteggio_totale);
+                exit(0);
+            default:
+                printf("\nScelta non valida. Riprova.\n");
+        }
+    } while (1);
+
+    return 0;
+}
